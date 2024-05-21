@@ -1,27 +1,43 @@
-# Tictactoe
+# Tic-Tac-Toe Client
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+This is the client-side of the multiplayer Tic-Tac-Toe game built using Angular.
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Node.js and npm installed
+- Angular CLI installed
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Follow these steps to set up and run the Angular application.
 
-## Build
+### Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+#### Clone the repository:
 
-## Running unit tests
+```
+git clone https://github.com/yourusername/tic-tac-toe-client.git
+cd tic-tac-toe-client
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Running the Application
 
-## Running end-to-end tests
+1. Start the Angular development server:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+ng serve
+```
 
-## Further help
+2. Open your browser and navigate to:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+http://localhost:4200/game/your-room-id/user-name
+```
+
+Replace your-room-id with the actual room ID you want to join or create and the user-name with a the User name that you want to join with.
+
+## Project Structure
+
+- `src/app/tic-tac-toe/tic-tac-toe.component.ts`: Main component handling the game logic and UI.
+- `src/app/tic-tac-toe.service.ts` : Service for handling communication with the Colyseus server.
+- `src/app/app-routing.module.ts` : Routing configuration to handle URLs with room IDs.
