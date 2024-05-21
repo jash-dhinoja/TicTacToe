@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { TicTacToeComponent } from './tic-tac-toe/tic-tac-toe.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   {
@@ -8,8 +9,13 @@ export const routes: Routes = [
     title: "Let's Play!!!",
   },
   {
+    path: 'lobby',
+    component: HomeComponent,
+    title: 'Lobby',
+  },
+  {
     path: '',
-    redirectTo: 'game/default-room',
+    redirectTo: '/lobby',
     pathMatch: 'full',
   },
 ];

@@ -1,34 +1,34 @@
 // src/GameState.ts
-import { type, Schema, ArraySchema, MapSchema } from '@colyseus/schema';
-import { Client } from 'colyseus';
+import { type, Schema, ArraySchema, MapSchema } from "@colyseus/schema";
+import { Client } from "colyseus";
 
 class GameState extends Schema {
-  @type(['string'])
+  @type(["string"])
   board: ArraySchema<string> = new ArraySchema(
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    '',
-    ''
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   );
 
-  @type('string')
-  currentSymbol: string = 'X';
+  @type("string")
+  currentSymbol: string = "X";
 
-  @type({ map: 'boolean' }) players = new MapSchema<string>();
+  @type({ map: "string" }) players = new MapSchema<string>();
 
-  @type('boolean')
+  @type("boolean")
   gameOver: boolean = false;
 
-  @type('string')
-  currentPlayer = '';
+  @type("string")
+  currentPlayer = "";
 
-  @type('string')
-  winner: string = '';
+  @type("string")
+  winner: string = "";
 
   makeMove(
     client: Client,
@@ -38,7 +38,7 @@ class GameState extends Schema {
     const { index, userName } = message;
 
     if (
-      this.board[index] === '' &&
+      this.board[index] === "" &&
       !this.gameOver &&
       this.currentPlayer === userName
     ) {
@@ -51,11 +51,11 @@ class GameState extends Schema {
       if (this.checkWin()) {
         this.gameOver = true;
         this.winner = userName;
-      } else if (this.board.every((cell) => cell !== '')) {
+      } else if (this.board.every((cell) => cell !== "")) {
         this.gameOver = true;
-        this.winner = 'Draw';
+        this.winner = "Draw";
       } else {
-        this.currentSymbol = this.currentSymbol === 'X' ? 'O' : 'X';
+        this.currentSymbol = this.currentSymbol === "X" ? "O" : "X";
         const otherPlayerSessionId =
           userName === playerIds[0] ? playerIds[1] : playerIds[0];
 
@@ -83,11 +83,11 @@ class GameState extends Schema {
   }
 
   resetGame() {
-    console.log('Server Game Reset');
-    this.board = new ArraySchema('', '', '', '', '', '', '', '', '');
-    this.currentSymbol = 'X';
+    console.log("Server Game Reset");
+    this.board = new ArraySchema("", "", "", "", "", "", "", "", "");
+    this.currentSymbol = "X";
     this.gameOver = false;
-    this.winner = '';
+    this.winner = "";
     this.currentPlayer = Array.from(this.players.keys())[0];
   }
 }

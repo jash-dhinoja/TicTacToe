@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="left">
+    <h2>Create or join room</h2>
+    <div class="textbox">
+      <p>Room Id</p>
+      <input type="text" [formControl]="roomId" required="" />
+    </div>
+    <div class="textbox">
+      <p>User Name</p>
+      <input type="text" [formControl]="userName" required />
+    </div>
+    <button [routerLink]="['/game/' + roomId.value + '/' + userName.value]">
+      Join or create room
+    </button>
+  </div>
+  <div class="right">
+    <h2>List of available rooms</h2>
+    <h3 *ngIf="availableRooms.length == 0">No available rooms</h3>
+    <table *ngIf="availableRooms.length > 0">
+      <thead>
+        <td>RoomId</td>
+        <td>Clients</td>
+        <td></td>
+      </thead>
+      <tr *ngFor="let room of availableRooms">
+        <td>{{ room.roomId }}</td>
+        <td>{{ room.clients }}</td>
+        <td>
+          <button
+            *ngIf="room.clients < 2"
+            [disabled]="
+              (userName.invalid && userName.dirty) || userName.untouched
+            "
+            [routerLink]="['/game/' + room.roomId + '/' + userName.value]"
+          >
+            Join as Player
+          </button>
+          <button
+            *ngIf="room.clients >= 2"
+            [disabled]="
+              (userName.invalid && userName.dirty) || userName.untouched
+            "
+            [routerLink]="['/game/' + room.roomId + '/' + userName.value]"
+          >
+            Join as Spectator
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="right"></div>
+</div>

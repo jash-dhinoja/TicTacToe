@@ -7,9 +7,7 @@
   <p *ngIf="waitingForOtherPlayers">Waiting for other player to join</p>
 </div>
 <div class="message">
-  <p *ngIf="spectator">
-    You are watching {{ players }} have the match of the century
-  </p>
+  <p *ngIf="spectator" [textContent]="displayPlayerName()"></p>
 </div>
 <div *ngIf="!winner" class="message">
   <p>Current Turn: {{ currentPlayer }}</p>

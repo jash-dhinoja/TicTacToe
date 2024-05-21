@@ -1,17 +1,25 @@
 // src/app/tic-tac-toe.service.ts
 import { Injectable } from '@angular/core';
-import { Client, Room } from 'colyseus.js';
+import { Client, Room, RoomAvailable } from 'colyseus.js';
 import { GameState } from '../../../server/src/GameState';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TicTacToeService {
-  private client: Client;
+  private client: Client = new Client('ws://localhost:2567');
   private room!: Room;
+  private lobby!: Room;
 
-  constructor() {
-    this.client = new Client('ws://localhost:2567');
+  private availableRooms: RoomAvailable[] = [];
+
+  async initializeLobby(): Promise<Room<any>> {
+    this.lobby = await this.client.joinOrCreate('lobby');
+    return this.lobby;
+  }
+
+  getAvailableRooms(): RoomAvailable[] {
+    return this.availableRooms;
   }
 
   async joinOrCreateRoom(roomId: string, userName: string) {

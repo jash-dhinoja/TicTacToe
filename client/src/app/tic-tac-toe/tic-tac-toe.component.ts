@@ -69,6 +69,12 @@ export class TicTacToeComponent {
     this.drawBabylonBoard();
   }
 
+  displayPlayerName() {
+    return `You are watching ${Array.from(
+      this.players.keys()
+    )} have the match of the century`;
+  }
+
   resetGame() {
     this.ticTacToeService.resetGame();
   }
