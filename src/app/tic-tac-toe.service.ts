@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Client, Room } from 'colyseus.js';
 import { GameState } from '../server/src/GameState';
+import { TicTacToeRoom } from '../server/src/TicTacToeRoom';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,15 @@ export class TicTacToeService {
   }
 
   async joinOrCreateRoom(roomId: string, userName: string) {
-    this.room = await this.client.joinOrCreate('tic-tac-toe', {
+    try {
+      this.room = await this.client.joinById(roomId, { roomId, userName });
+      console.log('Flag 1', this.room);
+      return this.room;
+    } catch (error) {
+      console.log(error);
+    }
+
+    this.room = await this.client.create('tic-tac-toe', {
       roomId,
       userName,
     });
