@@ -1,7 +1,7 @@
 // src/app/tic-tac-toe.service.ts
 import { Injectable } from '@angular/core';
 import { Client, Room } from 'colyseus.js';
-import { GameState } from '../../server/src/GameState';
+import { GameState } from '../../../server/src/GameState';
 
 @Injectable({
   providedIn: 'root',

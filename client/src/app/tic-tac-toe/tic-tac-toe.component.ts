@@ -10,7 +10,6 @@ import { TicTacToeService } from '../tic-tac-toe.service';
 import { CommonModule } from '@angular/common';
 import * as BABYLON from 'babylonjs';
 import '@babylonjs/loaders';
-import { Room } from 'colyseus.js';
 
 @Component({
   selector: 'app-tic-tac-toe',
@@ -150,6 +149,7 @@ export class TicTacToeComponent {
       const i = Math.floor(indx / 3);
       const j = indx % 3;
 
+      // Box creation
       const box = BABYLON.MeshBuilder.CreateBox(
         `box_${i}_${j}`,
         { size: 1 },
@@ -160,6 +160,7 @@ export class TicTacToeComponent {
       box.isPickable = !this.spectator;
       this.meshes[i][j] = box;
 
+      // Torus Creation
       const torus = BABYLON.MeshBuilder.CreateTorus(
         `torus_${i}_${j}`,
         { diameter: 1, thickness: 0.4 },
@@ -169,7 +170,7 @@ export class TicTacToeComponent {
       torus.position.x = (i - 1) * spacing;
       torus.position.z = (j - 1) * spacing;
 
-      // Create the "X" cross
+      // Custom xCross creation
       const xCross = this.createXCross(`xCross_${i}_${j}`, scene);
       xCross.scaling = new BABYLON.Vector3(0, 0, 0); // Start X with scale 0
       xCross.rotation.x = Math.PI / 2;
