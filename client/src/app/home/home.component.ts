@@ -24,6 +24,9 @@ export class HomeComponent {
 
   constructor(private router: Router) {}
 
+  /**
+   * Initializes the lobby room with listeners
+   */
   async ngOnInit() {
     this.lobby = await this.tictactoeService.initializeLobby();
     this.lobby.onMessage('rooms', (rooms) => {

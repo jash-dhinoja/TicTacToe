@@ -29,12 +29,13 @@ class GameState extends Schema {
 
   @type("string")
   winner: string = "";
-
-  makeMove(
-    client: Client,
-    message: any,
-    updateBoardCallback: (index: number) => void
-  ): boolean {
+  /**
+   * Registers move onto the board
+   * @param message Index of the move and username
+   * @param updateBoardCallback
+   * @returns
+   */
+  makeMove(message: any, updateBoardCallback: (index: number) => void) {
     const { index, userName } = message;
 
     if (
@@ -65,7 +66,10 @@ class GameState extends Schema {
     }
     return false;
   }
-
+  /**
+   * Checks if the there is a winner
+   * @returns Win
+   */
   checkWin(): boolean {
     const winningCombinations = [
       [0, 1, 2],
@@ -81,7 +85,9 @@ class GameState extends Schema {
       combination.every((index) => this.board[index] === this.currentSymbol)
     );
   }
-
+  /**
+   * Resets the state variable
+   */
   resetGame() {
     console.log("Server Game Reset");
     this.board = new ArraySchema("", "", "", "", "", "", "", "", "");

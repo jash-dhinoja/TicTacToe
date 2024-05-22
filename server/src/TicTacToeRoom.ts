@@ -1,6 +1,6 @@
 // src/TicTacToeRoom.ts
-import { Room, Client } from 'colyseus';
-import { GameState } from './GameState';
+import { Room, Client } from "colyseus";
+import { GameState } from "./GameState";
 
 class TicTacToeRoom extends Room<GameState> {
   // maxClients: number = 2;
@@ -12,14 +12,14 @@ class TicTacToeRoom extends Room<GameState> {
 
     this.roomId = roomId;
 
-    this.onMessage('make_move', (client, message) => {
-      this.state.makeMove(client, message, (index) => {
-        this.broadcast('update-board', index);
+    this.onMessage("make_move", (message) => {
+      this.state.makeMove(message, (index) => {
+        this.broadcast("update-board", index);
       });
     });
-    this.onMessage('reset-game', () => {
+    this.onMessage("reset-game", () => {
       this.state.resetGame();
-      this.broadcast('reset-client');
+      this.broadcast("reset-client");
     });
   }
 
@@ -32,13 +32,13 @@ class TicTacToeRoom extends Room<GameState> {
 
       if (this.state.players.size === 2) {
         this.state.currentPlayer = userName;
-        this.broadcast('play');
+        this.broadcast("play");
         return;
       }
-      this.broadcast('wait');
+      this.broadcast("wait");
       return;
     }
-    client.send('spectator');
+    client.send("spectator");
 
     // if we want to keep only 2 members per room
     // const { userName } = options;
