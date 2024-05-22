@@ -28,10 +28,19 @@ cd tic-tac-toe-client
 ng serve
 ```
 
-2. Open your browser and navigate to:
+2. Start the game server:
+
+Open a new terminal and navigate to the server folder
 
 ```bash
-http://localhost:4200/game/your-room-id/user-name
+cd ../server
+npx ts-node src/index.ts
+```
+
+3. Open your browser and navigate to:
+
+```bash
+http://localhost:4200/game/{your-room-id}/{user-name}
 ```
 
 Replace your-room-id with the actual room ID you want to join or create and the user-name with a the User name that you want to join with.
@@ -41,3 +50,4 @@ Replace your-room-id with the actual room ID you want to join or create and the 
 - `src/app/tic-tac-toe/tic-tac-toe.component.ts`: Main component handling the game logic and UI.
 - `src/app/tic-tac-toe.service.ts` : Service for handling communication with the Colyseus server.
 - `src/app/app-routing.module.ts` : Routing configuration to handle URLs with room IDs.
+- `src/app/home/home.component.ts`: Lobby room to view a list of available rooms or to create/join a room
